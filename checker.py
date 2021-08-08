@@ -74,11 +74,11 @@ logo = ("""
 
 print(logo)
 
-# Open file with accouns
+# Open file with accounts
 with open(sys.argv[1], 'r') as file:
     txtContent = file.readlines()
 
-print("Starting checking...")
+print("Starting to check ...")
 
 for user in txtContent:
     user = user.replace("\n", "");
@@ -87,8 +87,8 @@ for user in txtContent:
         time.sleep(1)
         if check(user[0],user[1]):
             print(f"Found working: {user[0]}:{user[1]}")
-            # Write in hits file the user who is correct
+            # Write the correct user to the hit file
             with open("hits.txt", "a") as file:
                file.write(f'{user[0]}:{user[1]}\n')
 
-print("All accounts is already checked. Please check hits file. Thx for use this script ;)")
+print("All accounts are already checked. Please check the hits file. Thanks for using this script ;)")

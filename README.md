@@ -20,13 +20,13 @@ $ python checker.py accounts.txt
        ░       ░ ░      ░ ░     ░        ░  ░   ░  ░░ ░       ░  ░  ░   ░  ░░ ░      ░  ░      ░  ░   ░     
                               ░                     ░                       ░                               
 
-Starting checking...
+Starting to check ...
 
 Found working: tests:password
 Found working: giveMeStar:Pls
 Found working: Obviusly:IfYouWant
 
-All accounts is already checked. Please check hits file. Thx for use this script ;)
+All accounts are already checked. Please check the hits file. Thanks for using this script ;)
 ```
 
 ## Setup
